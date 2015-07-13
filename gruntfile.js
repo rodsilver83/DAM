@@ -45,12 +45,37 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
+      options: {
+        mangle: false
+      },
       my_target: {
         files: {
-          'dma/dist/js/movies.min.js': ['dma/js/app.js',
+          'dma/dist/js/angular.min.js': [
+            'bower_components/jquery/dist/jquery.js',
+            'bower_components/angular/angular.js',
+            'bower_components/angular-route/angular-route.js',
+            'bower_components/angular-resource/angular-resource.js',
+            'bower_components/angular-animate/angular-animate.js'],
+          'dma/dist/js/movies.min.js': [
+            'dma/js/app.js',
             'dma/js/controllers.js',
             'dma/js/filters.js',
             'dma/js/services.js']
+        }
+      }
+    },
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          'dma/dist/css/movies.css': [
+            'dma/css/animations.css',
+            'bower_components/bootstrap/dist/css/bootstrap.min.css',
+            'dma/css/app.css'
+          ]
         }
       }
     }
@@ -61,6 +86,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.registerTask('server', "Serve your app", [
     'connect:server', 'watch']);
