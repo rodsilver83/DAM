@@ -9,6 +9,5 @@ moviesControllers.controller('MovieListCtrl', ['$scope', 'Movies',
 moviesControllers.controller("MovieDetailCtrl", ['$scope','$routeParams','Movies',
 function($scope,$routeParams,Movies){
     $scope.movie = Movies.get({movieId: $routeParams.movieId},function(movie){
-      console.log(movie);
     })
   }]);
