@@ -1,6 +1,6 @@
 {
-  "name": "angular-routing",
-  "description": "A starter project for AngularJS Routing",
+  "name": "angular-Movies App",
+  "description": "Movies listing App",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,

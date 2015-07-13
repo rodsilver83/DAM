@@ -19,7 +19,7 @@ describe('Movies controllers', function() {
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
       $httpBackend = _$httpBackend_;
       $httpBackend.expectGET('movies/movies.json').
-          respond([{title: 'Toy Story'}, {title: 'Motorola DROID'}]);
+          respond([{title: 'Toy Story'}, {title: 'Toy Story'}]);
 
       scope = $rootScope.$new();
       ctrl = $controller('MovieListCtrl', {$scope: scope});
