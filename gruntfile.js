@@ -86,17 +86,15 @@ module.exports = function (grunt) {
         },
         files: {                                   // Dictionary of files
           'dma/dist/index.html': 'tmp/src/index.html',     // 'destination': 'source'
-          'dma/dist/templates/movie-list.html': 'tmp/src/templates/movie-list.html',     // 'destination': 'source'
-          'dma/dist/templates/movie-detail.html': 'tmp/src/templates/movie-detail.html'     // 'destination': 'source'
+          'dma/dist/templates/movie-list.html': 'dma/src/templates/movie-list.html',     // 'destination': 'source'
+          'dma/dist/templates/movie-detail.html': 'dma/src/templates/movie-detail.html'     // 'destination': 'source'
         }
       }
     },
     processhtml: {
       dist: {
         files: {
-          'tmp/src/index.html': ['dma/src/index.html'],
-          'tmp/src/movie-list.html': ['dma/src/movie-list.html'],
-          'tmp/src/movie-detail.html': ['dma/src/movie-detail.html']
+          'tmp/src/index.html': ['dma/src/index.html']
         }
       }
     }
