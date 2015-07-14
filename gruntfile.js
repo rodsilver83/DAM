@@ -50,17 +50,16 @@ module.exports = function (grunt) {
       },
       my_target: {
         files: {
-          'dma/dist/js/angular.min.js': [
+          'dma/dist/js/movies.min.js': [
             'bower_components/jquery/dist/jquery.js',
             'bower_components/angular/angular.js',
             'bower_components/angular-route/angular-route.js',
             'bower_components/angular-resource/angular-resource.js',
-            'bower_components/angular-animate/angular-animate.js'],
-          'dma/dist/js/movies.min.js': [
-            'dma/js/app.js',
-            'dma/js/controllers.js',
-            'dma/js/filters.js',
-            'dma/js/services.js']
+            'bower_components/angular-animate/angular-animate.js',
+            'dma/src/js/app.js',
+            'dma/src/js/controllers.js',
+            'dma/src/js/filters.js',
+            'dma/src/js/services.js']
         }
       }
     },
@@ -71,11 +70,33 @@ module.exports = function (grunt) {
       },
       target: {
         files: {
-          'dma/dist/css/movies.css': [
-            'dma/css/animations.css',
+          'dma/dist/css/movies.min.css': [
+            'dma/src/css/animations.css',
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
-            'dma/css/app.css'
+            'dma/src/css/app.css'
           ]
+        }
+      }
+    },
+    htmlmin: {                                     // Task
+      dist: {                                      // Target
+        options: {                                 // Target options
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {                                   // Dictionary of files
+          'tmp/dist/index.html': 'dma/src/index.html',     // 'destination': 'source'
+          'tmp/dist/templates/movie-list.html': 'dma/src/templates/movie-list.html',     // 'destination': 'source'
+          'tmp/dist/templates/movie-detail.html': 'dma/src/templates/movie-detail.html'     // 'destination': 'source'
+        }
+      }
+    },
+    processhtml: {
+      dist: {
+        files: {
+          'dma/dist/index.html': ['tmp/dist/index.html'],
+          'dma/dist/movie-list.html': ['tmp/dist/movie-list.html'],
+          'dma/dist/movie-detail.html': ['tmp/dist/movie-detail.html']
         }
       }
     }
@@ -87,8 +108,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-processhtml');
 
   grunt.registerTask('server', "Serve your app", [
     'connect:server', 'watch']);
+
+  grunt.registerTask('distribution', "Prepare files for production", [
+    'cssmin', 'htmlmin', 'uglify', 'processhtml']);
 
 };
