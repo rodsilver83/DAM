@@ -34,12 +34,15 @@ moviesControllers.controller('MovieListCtrl',
 
         $scope.$watch('[title,orderProp,reverse,currentPage]',
           function (title, order, reverse, currentPage) {
+            //Get filter results
             $scope.filteredMovies = $filter('searchFilter')($scope.movies, title, order, reverse);
 
+            //Slice de page view
             var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
               end = begin + $scope.itemsPerPage;
             $scope.filteredPagingMovies = $scope.filteredMovies.slice(begin, end);
 
+            //Calculate items and pages from result
             $scope.totalItems = $scope.filteredMovies.length;
             $scope.noOfPages = ($scope.filteredMovies.length / $scope.itemsPerPage) + 1;
 

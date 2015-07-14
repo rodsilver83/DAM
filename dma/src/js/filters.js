@@ -48,7 +48,7 @@ movieFilters.filter('searchFilter', function () {
     }
 
     if (angular.isDefined(reverse)) {
-      if (reverse) {
+      if (!reverse) {
         matches.reverse();
       }
     }
