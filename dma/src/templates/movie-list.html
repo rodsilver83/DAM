@@ -1,26 +1,56 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12">
-			Search: <input type="search" ng-model="query">
-			Sort by:
-			<select ng-model="orderProp">
-				<option value="title">Alphabetical</option>
-				<option value="date">Newest</option>
-			</select>
+			<div class="input-group">
+					<span class="input-group-addon" id="sizing-addon2">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</span>
+				<input type="search" class="form-control" ng-model="title" placeholder="Movie title"
+							 aria-describedby="sizing-addon2">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-9">
+			<pagination ng-show="noOfPages >= 2" items-per-page="itemsPerPage"
+									total-items="totalItems" ng-model="currentPage"
+									ng-change="pageChanged()"></pagination>
+			<span class="label label-info totalItems">{{itemStart}} - {{itemEnd}} of {{totalItems}} results</span>
+		</div>
+		<div class="col-sm-3">
+			<div class="btn-group filterOrder pull-right" role="group" aria-label="filter">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						 {{orderProp}}
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#/movies" ng-click="orderProp='Date'">Date</a></li>
+						<li><a href="#/movies" ng-click="orderProp='Name'">Name</a></li>
+					</ul>
+				</div>
+
+				<button type="button" class="btn btn-primary" ng-click="reverse = !reverse">
+					{{reverse | reverseFilter}}
+				</button>
+
+			</div>
+
 
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="col-sm-12">
-			<!--Body content-->
-
-			<ul class="movies">
-				<li ng-repeat="movie in movies | filter:query | orderBy:orderProp | limitTo: 5"
-						class="thumbnail movie-listing">
+			<div class="panel panel-default"
+					 ng-repeat="movie in filteredPagingMovies
+						 | orderBy:orderProp : reverse | limitTo: itemsPerPage ">
+				<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-3">
 							<a href="#/movies/{{movie.title}}">
-								<img ng-src="{{movie.image}}">
+								<img ng-cloak ng-src="{{movie.image}}">
 							</a>
 						</div>
 						<div class="col-sm-9">
@@ -35,7 +65,7 @@
 										</tr>
 										<tr>
 											<td>Run Time</td>
-											<td>{{movie.run_time | timeFilter}} </td>
+											<td>{{movie.run_time | timeFilter}}</td>
 										</tr>
 									</table>
 								</div>
@@ -48,16 +78,13 @@
 									<button class="btn btn-success">
 										<span class="glyphicon glyphicon-play"></span> Play
 									</button>
-
 								</div>
 							</div>
 
 						</div>
 					</div>
-
-				</li>
-			</ul>
-
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

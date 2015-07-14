@@ -3,9 +3,9 @@ var movieApp = angular.module('movieApp', [
   'moviesControllers',
   'moviesServices',
   'movieFilters',
-  'ngAnimate'
+  'ngAnimate',
+  'ui.bootstrap'
 ]);
-
 
 movieApp.config(['$routeProvider',
   function($routeProvider) {
