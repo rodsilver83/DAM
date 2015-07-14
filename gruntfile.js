@@ -85,18 +85,18 @@ module.exports = function (grunt) {
           collapseWhitespace: true
         },
         files: {                                   // Dictionary of files
-          'tmp/dist/index.html': 'dma/src/index.html',     // 'destination': 'source'
-          'tmp/dist/templates/movie-list.html': 'dma/src/templates/movie-list.html',     // 'destination': 'source'
-          'tmp/dist/templates/movie-detail.html': 'dma/src/templates/movie-detail.html'     // 'destination': 'source'
+          'dma/dist/index.html': 'tmp/src/index.html',     // 'destination': 'source'
+          'dma/dist/templates/movie-list.html': 'tmp/src/templates/movie-list.html',     // 'destination': 'source'
+          'dma/dist/templates/movie-detail.html': 'tmp/src/templates/movie-detail.html'     // 'destination': 'source'
         }
       }
     },
     processhtml: {
       dist: {
         files: {
-          'dma/dist/index.html': ['tmp/dist/index.html'],
-          'dma/dist/movie-list.html': ['tmp/dist/movie-list.html'],
-          'dma/dist/movie-detail.html': ['tmp/dist/movie-detail.html']
+          'tmp/src/index.html': ['dma/src/index.html'],
+          'tmp/src/movie-list.html': ['dma/src/movie-list.html'],
+          'tmp/src/movie-detail.html': ['dma/src/movie-detail.html']
         }
       }
     }
@@ -115,6 +115,6 @@ module.exports = function (grunt) {
     'connect:server', 'watch']);
 
   grunt.registerTask('distribution', "Prepare files for production", [
-    'cssmin', 'htmlmin', 'uglify', 'processhtml']);
+    'cssmin', 'processhtml', 'htmlmin', 'uglify']);
 
 };
