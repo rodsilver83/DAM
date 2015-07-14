@@ -43,8 +43,6 @@ moviesControllers.controller('MovieListCtrl',
             $scope.totalItems = $scope.filteredMovies.length;
             $scope.noOfPages = ($scope.filteredMovies.length / $scope.itemsPerPage) + 1;
 
-            console.log("CurrentPage:",$scope.currentPage);
-            console.log("NoPages:",$scope.noOfPages);
             if ($scope.totalItems > $scope.itemsPerPage
               && $scope.currentPage < Math.floor($scope.noOfPages)) {
               $scope.itemEnd = $scope.itemsPerPage * $scope.currentPage;
