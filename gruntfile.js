@@ -58,6 +58,7 @@ module.exports = function (grunt) {
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'bower_components/bootstrap/js/dropdown.js',
+            'bower_components/angular-translate/angular-translate.js',
             'dma/src/js/app.js',
             'dma/src/js/controllers.js',
             'dma/src/js/filters.js',
